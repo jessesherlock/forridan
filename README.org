@@ -1,0 +1,65 @@
+* Forrídan
+*forridan* /Old English. strong verb. to intercept by riding before/
+
+A transducer based interceptor library. Focused on a single-pass approach (no :before/:after distinction), using lenses to pull interceptor arguments from the context and mixing sync and async interceptor fns.
+
+** WIP
+Currently at the proof of concept stage. Right now both dependency libraries (eft, an iteration library using the transducer machinery and soliton, a transducer based lens library) are in the project but will be broken out once it's past the proof of concept stage
+
+** Roadmap
+*** eft
+- [X] iterate transducer
+- [X] produce convenience fn
+- [X] reductions transducer
+- [-] common fns to halt iteration
+  - [X] on nil
+  - [X] at fixed point
+  - [X] on exception
+  - [ ] try step-fn wrapper to return caught exception
+  - [ ] on predicate fn
+- [ ] async update fn handling
+  - [ ] promise-chan
+  - [ ] manifold
+  - [ ] deferrable
+- [ ] top level API design
+*** soliton
+- [X] basic protocol
+- [X] basic types
+  - [X] keywords
+  - [X] fns
+  - [X] integers
+  - [X] vectors of basic types (lens composition)
+- [X] API fns
+- [X] lens constructors
+  - [X] default (getter fn, updater fn)
+  - [X] getter/setter variant
+  - [X] units lens
+- [-] included lenses
+  - [-] sequence lenses
+    - [X] nth
+    - [X] first
+    - [X] second
+    - [ ] next/rest
+    - [ ] pop
+    - [ ] peek
+    - [ ] last
+    - [ ] butlast
+    - [X] vector slice
+  - [-] map lenses
+    - [X] select-keys
+    - [ ] keys
+    - [ ] vals
+  - [ ] predicate lens
+  - [ ] dissocing with put/over?
+- [ ] async update fns
+- [ ] derived atoms
+- [ ] mirror/reflect (over variant w/ multiple lenses for update fns with arity > 1)
+*** forridan
+- [ ] basic map context execution
+- [ ] vec/list context variants
+- [ ] async interceptor support
+- [ ] convenience macro for defining interceptors and associated lenses
+- [ ] flock support (interceptor stacks represented as zipper)
+- [ ] threading macro allowing mixed async/sync fns
+- [ ] spec magic threading (using names of function specs to infer location of arguments in contexts)
+

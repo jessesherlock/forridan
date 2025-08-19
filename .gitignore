@@ -1,0 +1,8 @@
+.cpcache/*
+.#*
+*.~undo-tree~
+.nrepl-port
+.rebel_readline_history
+.shadow-cljs
+out/*
+target/*

@@ -1,0 +1,16 @@
+* Forrídan
+*forridan* /Old English. strong verb. to intercept by riding before/
+
+A transducer based interceptor/pipeline library.
+
+At the most basic level, forridan takes a collection of functions called a "flock" and a context and runs those functions in sequence over the context. Since the flock is attached to the context, any flock functions can modify the flock as it runs. This can be used for interceptor style middleware or any kind of data pipeline, including self-modifying pipelines.
+
+The use of the `ergo` library allows you to mix sync and async pipeline functions, and the `soliton` lens library allows you to decomplect the logic of each function from the location of the data in the context, with these lenses also supporting sync and async functions.
+
+The simplest context is the aptly named `SimpleContext`, which steps by applying the function stored in the context under the `:step-fn` key to the context.
+
+The state machine context, `SMContext`, applies the transition function at `:transition-fn` to the context, which should return a function representing the state, it attaches this to the `:state` key of the context and applies the function to the context.
+
+The main type of context in Forridan is the `FlockContext`, a collection of functions is stored in the context under the `:flock` key and the flock is "advanced" to the next function and that function is applied to the context each step. The default implementation handles a sequence (with the fns discarded after being applied), a vector (with the fns remaining in the vector after being applied) or a tree of functions (stored in a zipper advancing to the next leaf node each step).
+
+The combination of a context map of arbitrary data, a tree of processing functions and the ability to easily compose sync and async functions with multi-arity lenses is a flexible and powerful way to compose data pipelines that can be suspended, serialized, resumed, debugged by displaying each step. (TODO: make some concrete examples of this)
